@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenPlayground - Build, Share, Explore</title>
-
     <link rel="stylesheet" href="./css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +13,6 @@
 </head>
 
 <body>
-
     <!-- Theme Toggle -->
     <div class="icon">
         <button id="toggle-mode-btn" aria-label="Toggle theme">
@@ -27,13 +25,9 @@
         <div class="projects-heading">
             <p>OpenPlayground</p>
             <h3><span>Build</span>, Share & Explore</h3>
-            <p class="tagline">
-                A community-driven platform where developers showcase their creativity through interactive web projects
-            </p>
-
+            <p class="tagline">A community-driven platform where developers showcase their creativity through interactive web projects</p>
             <div class="btn-container">
-                <a href="https://github.com/YadavAkhileshh/OpenPlayground" target="_blank"
-                    rel="noopener noreferrer" class="source-code-btn">
+                <a href="https://github.com/YadavAkhileshh/OpenPlayground" target="_blank" rel="noopener noreferrer" class="source-code-btn">
                     View on GitHub
                 </a>
                 <a href="#contribute" class="contribute-btn">
@@ -42,210 +36,185 @@
             </div>
         </div>
 
-        <!-- Category Filter -->
-        <div class="category-filter">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="action">Action</button>
-            <button class="filter-btn" data-filter="strategy">Strategy</button>
-            <button class="filter-btn" data-filter="puzzle">Puzzle</button>
-            <button class="filter-btn" data-filter="utility">Utility</button>
-            <button class="filter-btn" data-filter="finance">Finance</button>
-        </div>
+            <!-- Category Filter -->
+            <div class="category-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="action">Action</button>
+                <button class="filter-btn" data-filter="strategy">Strategy</button>
+                <button class="filter-btn" data-filter="puzzle">Puzzle</button>
+                <button class="filter-btn" data-filter="utility">Utility</button>
+            </div>
 
-        <!-- Projects -->
-        <div class="projects-container">
+            <div class="projects-container">
+                <!-- Infinite Parallax Runner Project -->
+                <a href="./projects/InfiniteParallaxRunner/index.html" class="card" data-category="action">
+                    <div class="card-cover runner-cover">
+                        <i class="ri-gamepad-line"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-flex">
+                            <h3 class="card-heading">Infinite Runner</h3>
+                            <span class="category-tag">Action</span>
+                        </div>
+                        <p class="card-description">Neon-styled procedural runner with smooth parallax and score system.</p>
+                        <div class="card-tech">
+                            <span>HTML</span>
+                            <span>Canvas</span>
+                            <span>JS</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Calculator Project -->
+                <a href="./projects/calculator/index.html" class="card" data-category="utility">
+                    <div class="card-cover calculator-cover">
+                        <i class="ri-calculator-line"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-flex">
+                            <h3 class="card-heading">Calculator</h3>
+                            <span class="category-tag">Utility</span>
+                        </div>
+                        <p class="card-description">Basic arithmetic calculator with keyboard support and clean interface.</p>
+                        <div class="card-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </a>
 
-            <!-- Infinite Runner -->
-            <a href="./projects/InfiniteParallaxRunner/index.html" class="card" data-category="action">
-                <div class="card-cover runner-cover">
-                    <i class="ri-gamepad-line"></i>
-                </div>
-                <div class="card-content">
-                    <div class="card-header-flex">
-                        <h3 class="card-heading">Infinite Runner</h3>
-                        <span class="category-tag">Action</span>
+                <!-- Tic Tac Toe Project -->
+                <a href="./projects/tic-tac-toe/index.html" class="card" data-category="strategy">
+                    <div class="card-cover tictactoe-cover">
+                        <i class="ri-grid-line"></i>
                     </div>
-                    <p class="card-description">
-                        Neon-styled procedural runner with smooth parallax and score system.
-                    </p>
-                    <div class="card-tech">
-                        <span>HTML</span>
-                        <span>Canvas</span>
-                        <span>JS</span>
+                    <div class="card-content">
+                        <div class="card-header-flex">
+                            <h3 class="card-heading">Tic Tac Toe</h3>
+                            <span class="category-tag">Strategy</span>
+                        </div>
+                        <p class="card-description">Classic strategy game for two players with win detection.</p>
+                        <div class="card-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
 
-            <!-- Calculator -->
-            <a href="./projects/calculator/index.html" class="card" data-category="utility">
-                <div class="card-cover calculator-cover">
-                    <i class="ri-calculator-line"></i>
-                </div>
-                <div class="card-content">
-                    <div class="card-header-flex">
-                        <h3 class="card-heading">Calculator</h3>
-                        <span class="category-tag">Utility</span>
+                <!-- Todo List Project -->
+                <a href="./projects/todo-list/index.html" class="card" data-category="utility">
+                    <div class="card-cover todo-cover">
+                        <i class="ri-todo-line"></i>
                     </div>
-                    <p class="card-description">
-                        Basic arithmetic calculator with keyboard support and clean interface.
-                    </p>
-                    <div class="card-tech">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JavaScript</span>
+                    <div class="card-content">
+                        <div class="card-header-flex">
+                            <h3 class="card-heading">Todo List</h3>
+                            <span class="category-tag">Utility</span>
+                        </div>
+                        <p class="card-description">Task management with add, edit, delete, and local storage.</p>
+                        <div class="card-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
 
-            <!-- Tic Tac Toe -->
-            <a href="./projects/tic-tac-toe/index.html" class="card" data-category="strategy">
-                <div class="card-cover tictactoe-cover">
-                    <i class="ri-grid-line"></i>
-                </div>
-                <div class="card-content">
-                    <div class="card-header-flex">
-                        <h3 class="card-heading">Tic Tac Toe</h3>
-                        <span class="category-tag">Strategy</span>
+                <!-- Counter Project -->
+                <a href="./projects/counter/index.html" class="card" data-category="utility">
+                    <div class="card-cover counter-cover">
+                        <i class="ri-add-circle-line"></i>
                     </div>
-                    <p class="card-description">
-                        Classic strategy game for two players with win detection.
-                    </p>
-                    <div class="card-tech">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JavaScript</span>
+                    <div class="card-content">
+                        <div class="card-header-flex">
+                            <h3 class="card-heading">Counter</h3>
+                            <span class="category-tag">Utility</span>
+                        </div>
+                        <p class="card-description">Simple counter with increment, decrement, and reset functionality.</p>
+                        <div class="card-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
 
-            <!-- Todo List -->
-            <a href="./projects/todo-list/index.html" class="card" data-category="utility">
-                <div class="card-cover todo-cover">
-                    <i class="ri-todo-line"></i>
-                </div>
-                <div class="card-content">
-                    <div class="card-header-flex">
-                        <h3 class="card-heading">Todo List</h3>
-                        <span class="category-tag">Utility</span>
+                <!-- Quiz Game Project -->
+                <a href="./projects/quiz-game/index.html" class="card" data-category="puzzle">
+                    <div class="card-cover quiz-cover">
+                        <i class="ri-question-line"></i>
                     </div>
-                    <p class="card-description">
-                        Task management with add, edit, delete, and local storage.
-                    </p>
-                    <div class="card-tech">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JavaScript</span>
+                    <div class="card-content">
+                        <div class="card-header-flex">
+                            <h3 class="card-heading">Quiz Game</h3>
+                            <span class="category-tag">Puzzle</span>
+                        </div>
+                        <p class="card-description">Multiple choice quiz with score tracking and timer.</p>
+                        <div class="card-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
 
-            <!-- Counter -->
-            <a href="./projects/counter/index.html" class="card" data-category="utility">
-                <div class="card-cover counter-cover">
-                    <i class="ri-add-circle-line"></i>
-                </div>
-                <div class="card-content">
-                    <div class="card-header-flex">
-                        <h3 class="card-heading">Counter</h3>
-                        <span class="category-tag">Utility</span>
+                <!-- Digital Clock Project -->
+                <a href="./projects/digital-clock/index.html" class="card" data-category="utility">
+                    <div class="card-cover clock-cover">
+                        <i class="ri-time-line"></i>
                     </div>
-                    <p class="card-description">
-                        Simple counter with increment, decrement, and reset functionality.
-                    </p>
-                    <div class="card-tech">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JavaScript</span>
+                    <div class="card-content">
+                        <div class="card-header-flex">
+                            <h3 class="card-heading">Digital Clock</h3>
+                            <span class="category-tag">Utility</span>
+                        </div>
+                        <p class="card-description">Live digital clock displaying current time and date.</p>
+                        <div class="card-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
                     </div>
-                </div>
-            </a>
-
-            <!-- Quiz Game -->
-            <a href="./projects/quiz-game/index.html" class="card" data-category="puzzle">
-                <div class="card-cover quiz-cover">
-                    <i class="ri-question-line"></i>
-                </div>
-                <div class="card-content">
-                    <div class="card-header-flex">
-                        <h3 class="card-heading">Quiz Game</h3>
-                        <span class="category-tag">Puzzle</span>
+                </a>
+                <!-- Password Strength Checker Project -->
+                <a href="./projects/password-strength-checker/index.html" class="card" data-category="utility">
+                    <div class="card-cover password-cover">
+                        <i class="ri-lock-password-line"></i>
                     </div>
-                    <p class="card-description">
-                        Multiple choice quiz with score tracking and timer.
-                    </p>
-                    <div class="card-tech">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JavaScript</span>
+                    <div class="card-content">
+                        <div class="card-header-flex">
+                            <h3 class="card-heading">Password Strength Checker</h3>
+                            <span class="category-tag">Utility</span>
+                        </div>
+                        <p class="card-description">Real-time password strength checker with reveal/hide toggle and suggestions.</p>
+                        <div class="card-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
                     </div>
-                </div>
-            </a>
-
-            <!-- Digital Clock -->
-            <a href="./projects/digital-clock/index.html" class="card" data-category="utility">
-                <div class="card-cover clock-cover">
-                    <i class="ri-time-line"></i>
-                </div>
-                <div class="card-content">
-                    <div class="card-header-flex">
-                        <h3 class="card-heading">Digital Clock</h3>
-                        <span class="category-tag">Utility</span>
+                </a>
+                <!-- Weather App Project -->
+                <a href="./projects/WeatherApp/index.html" class="card" data-category="utility">
+                    <div class="card-cover weather-cover">
+                        <i class="ri-sun-cloudy-line"></i>
                     </div>
-                    <p class="card-description">
-                        Live digital clock displaying current time and date.
-                    </p>
-                    <div class="card-tech">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JavaScript</span>
+                    <div class="card-content">
+                        <div class="card-header-flex">
+                            <h3 class="card-heading">Weather App</h3>
+                            <span class="category-tag">Utility</span>
+                        </div>
+                        <p class="card-description">Instant weather dashboard with dark glassmorphism UI and real-time API data.</p>
+                        <div class="card-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JS</span>
+                            <span>API</span>
+                        </div>
                     </div>
-                </div>
-            </a>
-
-            <!-- Password Strength Checker -->
-            <a href="./projects/password-strength-checker/index.html" class="card" data-category="utility">
-                <div class="card-cover password-cover">
-                    <i class="ri-lock-password-line"></i>
-                </div>
-                <div class="card-content">
-                    <div class="card-header-flex">
-                        <h3 class="card-heading">Password Strength Checker</h3>
-                        <span class="category-tag">Utility</span>
-                    </div>
-                    <p class="card-description">
-                        Real-time password strength checker with suggestions.
-                    </p>
-                    <div class="card-tech">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JavaScript</span>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Weather App -->
-            <a href="./projects/WeatherApp/index.html" class="card" data-category="utility">
-                <div class="card-cover weather-cover">
-                    <i class="ri-sun-cloudy-line"></i>
-                </div>
-                <div class="card-content">
-                    <div class="card-header-flex">
-                        <h3 class="card-heading">Weather App</h3>
-                        <span class="category-tag">Utility</span>
-                    </div>
-                    <p class="card-description">
-                        Instant weather dashboard with real-time API data.
-                    </p>
-                    <div class="card-tech">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JS</span>
-                        <span>API</span>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Smart Expense Tracker -->
+                </a>
+                  <!-- Smart Expense Tracker -->
             <a href="./projects/smart-expense-tracker/index.html" class="card" data-category="finance">
                 <div class="card-cover expense-cover">
                     <i class="ri-wallet-3-line"></i>
@@ -265,39 +234,56 @@
                     </div>
                 </div>
             </a>
+            </div>
+            
+            <!-- Pagination Controls -->
+            <div class="pagination-container" id="pagination-controls"></div>
 
-        </div>
-
-        <!-- Pagination -->
-        <div class="pagination-container" id="pagination-controls"></div>
-
-        <!-- Contribute Section -->
+        <!-- How to Contribute Section -->
         <div id="contribute" class="contribute-section">
             <h3>How to Contribute</h3>
-            <p>Ready to showcase your project? Follow these steps:</p>
-
+            <p>Ready to showcase your project? Follow these simple steps:</p>
             <div class="steps">
                 <div class="step-card">
+                    <div class="step-icon"><i class="ri-git-branch-line"></i></div>
                     <h4>Fork & Clone</h4>
-                    <code>git clone https://github.com/your-username/OpenPlayground</code>
+                    <p>Fork the repository and clone it locally</p>
+                    <div class="terminal-window">
+                        <code>git clone https://github.com/your-username/OpenPlayground</code>
+                    </div>
                 </div>
                 <div class="step-card">
+                    <div class="step-icon"><i class="ri-folder-add-line"></i></div>
                     <h4>Create Project</h4>
-                    <code>mkdir projects/my-project</code>
+                    <p>Add your project in the projects directory</p>
+                    <div class="terminal-window">
+                        <code>mkdir projects/my-project</code>
+                    </div>
                 </div>
                 <div class="step-card">
+                    <div class="step-icon"><i class="ri-layout-grid-line"></i></div>
                     <h4>Add Card</h4>
-                    <code>&lt;a href="./projects/my-project/index.html"&gt;</code>
+                    <p>Include your project card in index.html</p>
+                    <div class="terminal-window">
+                        <code>&lt;a href="./projects/my-project/index.html" class="card"&gt;</code>
+                    </div>
                 </div>
                 <div class="step-card">
+                    <div class="step-icon"><i class="ri-git-pull-request-line"></i></div>
                     <h4>Submit PR</h4>
-                    <code>git commit -m "Add: My Project"</code>
+                    <p>Commit changes and create a pull request</p>
+                    <div class="terminal-window">
+                        <code>git commit -m "Add: My Project"</code>
+                    </div>
                 </div>
             </div>
+            <a href="https://github.com/YadavAkhileshh/OpenPlayground#readme" target="_blank" rel="noopener noreferrer" class="source-code-btn">
+                Read Full Guide
+            </a>
         </div>
     </section>
 
-    <!-- Scroll to Top -->
+    <!-- Scroll to Top Button -->
     <button id="scrollToTopBtn" title="Go to top">
         <i class="ri-arrow-up-double-fill"></i>
     </button>

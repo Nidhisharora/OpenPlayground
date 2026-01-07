@@ -127,16 +127,25 @@ function toggleWall(node) {
 
 // Reset functions
 function clearBoard() {
-    if (isRunning) return;
+    isRunning = false; // Force stop any running animation
     grid.forEach(row => row.forEach(node => {
         node.isWall = false;
-        node.element.classList.remove('wall');
+        node.element.classList.remove('wall', 'visited', 'path', 'start', 'target');
     }));
+    // Re-add start/target visuals since we wiped classes
+    updateStartTargetVisuals();
     clearPath();
 }
 
 function clearPath() {
-    if (isRunning) return;
+    // If we just want to clear path but keep walls, we don't necessarily need to stop running
+    // but usually user clicks this to reset.
+    // Let's NOT force stop here if strictly clearing path, 
+    // BUT for stability let's allow it to reset state if used manually.
+    // If called internally by visualize(), isRunning is true.
+    // So we need to distinct internal vs external call.
+    // For simplicity, let's keep internal clearPath mostly pure state reset.
+
     grid.forEach(row => row.forEach(node => {
         node.isVisited = false;
         node.distance = Infinity;
@@ -146,8 +155,14 @@ function clearPath() {
     }));
 }
 
+// Wrapper for the button specifically
+function handleClearPath() {
+    isRunning = false;
+    clearPath();
+}
+
 function generateRandomMaze() {
-    if (isRunning) return;
+    isRunning = false; // Force stop
     clearBoard();
     const density = 0.3; // 30% walls
     grid.forEach(row => row.forEach(node => {
@@ -454,7 +469,7 @@ function animateShortestPath(nodesInShortestPathOrder) {
 // Bind Events
 visualizeBtn.addEventListener('click', visualize);
 clearBoardBtn.addEventListener('click', clearBoard);
-clearPathBtn.addEventListener('click', clearPath);
+clearPathBtn.addEventListener('click', handleClearPath);
 generateMazeBtn.addEventListener('click', generateRandomMaze);
 window.onload = initGrid;
 window.addEventListener('mouseup', handleMouseUp); // Global mouse up

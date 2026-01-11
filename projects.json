@@ -1292,6 +1292,19 @@
     "icon": "ri-music-2-line",
     "coverStyle": "background: linear-gradient(135deg, #1f2933 0%, #4c1d95 100%); color:#f5f3ff;"
   },
+   {
+    "title": "Barcode Generator",
+    "category": "utility",
+    "description": "Generate barcodes from input text ",
+    "tech": [
+      "HTML",
+      "CSS",
+      "JS"
+    ],
+    "link": "./projects/Barcode_Generator/index.html",
+    "icon": "ri-barcode-line",
+    "coverStyle": "background: linear-gradient(135deg, #1f2933 0%, #4c1d95 100%); color:#f5f3ff;"
+  },
   {
     "title": "Life Choice Simulator",
     "category": "utility",

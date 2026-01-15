@@ -3196,7 +3196,22 @@
   "link": "./projects/flowlogic/index.html",
   "icon": "ri-flow-chart",
   "coverStyle": "background: linear-gradient(135deg, #fdf2f8 0%, #fbcfe8 50%, #fae8ff 100%); color: #581c87;"
+},
+
+{
+  "title": "Cognitive Load Visualizer",
+  "category": "experimental",
+  "description": "Interactive simulation that visualizes how cognitive load accumulates from tasks, interruptions, and recovery over time.",
+  "tech": [
+    "HTML",
+    "CSS",
+    "JS"
+  ],
+  "link": "./projects/cognitive-load-visualizer/index.html",
+  "icon": "ri-brain-line",
+  "coverStyle": "background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;"
 }
+
 
 
 

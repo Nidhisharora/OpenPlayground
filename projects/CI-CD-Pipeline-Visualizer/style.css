@@ -322,6 +322,11 @@ body {
     accent-color: var(--color-info);
 }
 
+.config-option input[type="checkbox"]:focus-visible {
+    outline: 2px solid var(--color-info);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.4);
+}
 .option-label {
     display: flex;
     align-items: center;

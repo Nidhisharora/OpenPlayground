@@ -637,6 +637,11 @@
       "link": "./projects/Hover maze/index.html"
     },
     {
+      "folder": "Human-Attention-Heatmap",
+      "path": "./projects/Human-Attention-Heatmap/project.json",
+      "link": "./projects/Human-Attention-Heatmap/index.html"
+    },
+    {
       "folder": "HumanErrorPlayground",
       "path": "./projects/HumanErrorPlayground/project.json",
       "link": "./projects/HumanErrorPlayground/index.html"

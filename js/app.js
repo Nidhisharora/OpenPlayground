@@ -169,11 +169,31 @@ class ProjectManager {
         const el = this.elements;
 
         if (el.searchInput) {
+            // Enhanced mobile search with debouncing and suggestions
+            let searchTimeout;
+            
             el.searchInput.addEventListener('input', (e) => {
-                this.state.visibilityEngine?.setSearchQuery(e.target.value);
-                this.state.currentPage = 1;
-                this.render();
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    this.handleSearch(e.target.value);
+                }, 300); // Debounce for better performance
             });
+
+            // Enter key support
+            el.searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    this.handleSearch(e.target.value);
+                }
+                if (e.key === 'Escape') {
+                    e.target.value = '';
+                    this.handleSearch('');
+                    e.target.blur();
+                }
+            });
+
+            // Search history and suggestions
+            this.setupSearchSuggestions(el.searchInput);
         }
 
         if (el.sortSelect) {
@@ -203,6 +223,73 @@ class ProjectManager {
         if (el.randomProjectBtn) {
             el.randomProjectBtn.addEventListener('click', () => this.openRandomProject());
         }
+    }
+
+    handleSearch(query) {
+        // Save to search history
+        if (query.trim()) {
+            this.saveSearchHistory(query.trim());
+        }
+        
+        this.state.visibilityEngine?.setSearchQuery(query);
+        this.state.currentPage = 1;
+        this.render();
+    }
+
+    setupSearchSuggestions(searchInput) {
+        const suggestionsContainer = document.createElement('div');
+        suggestionsContainer.className = 'search-suggestions';
+        searchInput.parentNode.appendChild(suggestionsContainer);
+
+        searchInput.addEventListener('focus', () => {
+            this.showSearchSuggestions(searchInput, suggestionsContainer);
+        });
+
+        searchInput.addEventListener('blur', (e) => {
+            // Delay hiding to allow clicking on suggestions
+            setTimeout(() => {
+                suggestionsContainer.style.display = 'none';
+            }, 200);
+        });
+    }
+
+    showSearchSuggestions(input, container) {
+        const history = this.getSearchHistory();
+        const currentValue = input.value.toLowerCase();
+        
+        // Get project suggestions based on current input
+        const projectSuggestions = this.state.allProjects
+            .filter(p => p.title.toLowerCase().includes(currentValue))
+            .slice(0, 3)
+            .map(p => p.title);
+
+        const suggestions = [...new Set([...projectSuggestions, ...history])].slice(0, 5);
+        
+        if (suggestions.length === 0) {
+            container.style.display = 'none';
+            return;
+        }
+
+        container.innerHTML = suggestions.map(suggestion => 
+            `<div class="suggestion-item" onclick="this.parentNode.previousElementSibling.value='${suggestion}'; window.projectManagerInstance.handleSearch('${suggestion}');">
+                <i class="ri-search-line"></i>
+                <span>${suggestion}</span>
+            </div>`
+        ).join('');
+        
+        container.style.display = 'block';
+    }
+
+    saveSearchHistory(query) {
+        let history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+        history = history.filter(item => item !== query); // Remove duplicates
+        history.unshift(query); // Add to beginning
+        history = history.slice(0, 10); // Keep only last 10
+        localStorage.setItem('searchHistory', JSON.stringify(history));
+    }
+
+    getSearchHistory() {
+        return JSON.parse(localStorage.getItem('searchHistory') || '[]');
     }
 
     setViewMode(mode) {
@@ -285,10 +372,17 @@ class ProjectManager {
             const coverStyle = project.coverStyle || '';
             const coverClass = project.coverClass || '';
             const sourceUrl = this.getSourceCodeUrl(project.link);
+            const projectDataAttr = this.escapeHtml(JSON.stringify(project));
 
             return `
                 <div class="card" data-category="${this.escapeHtml(project.category)}" onclick="window.location.href='${this.escapeHtml(project.link)}'; event.stopPropagation();">
                     <div class="card-actions">
+                        <button class="preview-btn" 
+                                data-project='${projectDataAttr}'
+                                onclick="event.preventDefault(); event.stopPropagation(); window.openSandboxPreview(this);"
+                                title="Quick Preview">
+                            <i class="ri-play-circle-line"></i>
+                        </button>
                         <button class="bookmark-btn ${isBookmarked ? 'bookmarked' : ''}" 
                                 data-project-title="${this.escapeHtml(project.title)}" 
                                 onclick="event.preventDefault(); event.stopPropagation(); window.toggleProjectBookmark(this, '${this.escapeHtml(project.title)}', '${this.escapeHtml(project.link)}', '${this.escapeHtml(project.category)}', '${this.escapeHtml(project.description || '')}');"
@@ -300,6 +394,11 @@ class ProjectManager {
                            title="View Source Code">
                             <i class="ri-github-fill"></i>
                         </a>
+                        <button class="view-insights-btn"
+                                onclick="event.preventDefault(); event.stopPropagation(); window.openInsightsPanel('${this.escapeHtml(project.title)}');"
+                                title="View Community Insights">
+                            <i class="ri-lightbulb-line"></i>
+                        </button>
                     </div>
                     <div class="card-link">
                         <div class="card-cover ${coverClass}" style="${coverStyle}">
@@ -324,6 +423,7 @@ class ProjectManager {
             const isBookmarked = window.bookmarksManager?.isBookmarked(project.title);
             const coverStyle = project.coverStyle || '';
             const coverClass = project.coverClass || '';
+            const projectDataAttr = this.escapeHtml(JSON.stringify(project));
 
             return `
                 <div class="list-card">
@@ -338,10 +438,21 @@ class ProjectManager {
                         <p class="list-card-description">${this.escapeHtml(project.description || '')}</p>
                     </div>
                     <div class="list-card-actions">
+                        <button class="preview-btn" 
+                                data-project='${projectDataAttr}'
+                                onclick="event.stopPropagation(); window.openSandboxPreview(this);"
+                                title="Quick Preview">
+                            <i class="ri-play-circle-line"></i>
+                        </button>
                         <button class="bookmark-btn ${isBookmarked ? 'bookmarked' : ''}"
                                 onclick="window.toggleProjectBookmark(this, '${this.escapeHtml(project.title)}', '${this.escapeHtml(project.link)}', '${this.escapeHtml(project.category)}', '${this.escapeHtml(project.description || '')}');"
                                 title="${isBookmarked ? 'Remove from bookmarks' : 'Add to bookmarks'}">
                             <i class="${isBookmarked ? 'ri-bookmark-fill' : 'ri-bookmark-line'}"></i>
+                        </button>
+                        <button class="view-insights-btn"
+                                onclick="window.openInsightsPanel('${this.escapeHtml(project.title)}');"
+                                title="View Community Insights">
+                            <i class="ri-lightbulb-line"></i>
                         </button>
                         <a href="${project.link}" class="view-btn" title="View Project">
                             <i class="ri-arrow-right-line"></i>
@@ -544,6 +655,27 @@ window.toggleProjectBookmark = function (btn, title, link, category, description
 
 // Toast notifications are now handled by NotificationManager
 
+/**
+ * Global Sandbox Preview Handler
+ * Feature #1334: Project Playground Sandbox & Live Preview
+ */
+window.openSandboxPreview = function(btn) {
+    if (!window.sandboxEngine) {
+        console.warn('Sandbox engine not loaded');
+        return;
+    }
+    
+    try {
+        const projectData = btn.dataset.project;
+        if (projectData) {
+            const project = JSON.parse(projectData);
+            window.sandboxEngine.open(project);
+        }
+    } catch (e) {
+        console.error('Failed to open sandbox preview:', e);
+    }
+};
+
 // ===============================
 // Global Initialization
 // ===============================
@@ -573,16 +705,29 @@ document.addEventListener('componentLoaded', (e) => {
     }
 });
 
+// Initialize Command Palette
+let commandPalette = null;
+function initCommandPalette() {
+    const manager = window.projectManagerInstance;
+    if (manager && !commandPalette) {
+        commandPalette = new CommandPalette(manager);
+        keyevents(commandPalette); // Pass command palette instance to keyboard handler
+        console.log("✨ Command Palette initialized");
+    }
+}
+
 // Also check immediately in case components already loaded (module timing issue)
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-        keyevents();
+        initCommandPalette();
         setTimeout(initProjectManager, 100); // Small delay to ensure components are ready
+        setTimeout(checkInsightDeepLink, 600); // Check for insight deep links
     });
 } else {
     // DOM already loaded
-    keyevents();
+    initCommandPalette();
     setTimeout(initProjectManager, 100);
+    setTimeout(checkInsightDeepLink, 600);
 }
 
 // Fade-in animation observer

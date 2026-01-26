@@ -1,0 +1,16 @@
+{
+  "title": "Bubble Pop Frenzy",
+  "category": "arcade",
+  "difficulty": "Beginner",
+  "description": "A fast-paced bubble popping game with time pressure, particle effects, and multiple difficulty levels. Pop as many bubbles as you can before time runs out!",
+  "tech": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "LocalStorage",
+    "CSS Animations",
+    "Particle Effects"
+  ],
+  "icon": "ri-bubble-chart-line",
+  "coverStyle": "background: radial-gradient(circle at 30% 20%, #0c2461 0%, #1e3c72 30%, #2a5298 100%); color: white; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); border: 2px solid rgba(255, 255, 255, 0.1);"
+}

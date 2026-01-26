@@ -1,0 +1,14 @@
+{
+  "title": "Neumorphism UI Showcase",
+  "category": "design",
+  "difficulty": "Beginner",
+  "description": "A modern neumorphic UI component showcase featuring interactive controls with soft shadow aesthetics and smooth animations.",
+  "tech": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Neumorphism Design"
+  ],
+  "icon": "ri-equalizer-line",
+  "coverStyle": "background: linear-gradient(145deg, #ffffff, #f0f0f0); color: #2c3e50; box-shadow: 20px 20px 60px rgba(174, 187, 207, 0.4), -20px -20px 60px rgba(255, 255, 255, 0.9);"
+}

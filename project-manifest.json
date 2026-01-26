@@ -899,6 +899,11 @@
       "link": "./projects/LSB Image Steganography Tool/index.html"
     },
     {
+      "folder": "Neumorephism UI",
+      "path": "./projects/Neumorphism/project.json",
+      "link": "./projects/Neumorphism/index.html"
+    },
+    {
       "folder": "Lunar-lander",
       "path": "./projects/Lunar-lander/project.json",
       "link": "./projects/Lunar-lander/index.html"
@@ -932,6 +937,11 @@
       "folder": "Memory Card Flip Game",
       "path": "./projects/Memory Card Flip Game/project.json",
       "link": "./projects/Memory Card Flip Game/index.html"
+    },
+    {
+      "folder": "BubblePop",
+      "path": "./projects/BubblePop/project.json",
+      "link": "./projects/BubblePop/index.html"
     },
     {
       "folder": "memory-flip-game",

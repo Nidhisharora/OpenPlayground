@@ -13,7 +13,7 @@ class SandboxEngine {
         this.maxHistorySize = 50;
         this.forkedProjects = this.loadForkedProjects();
         this.isOpen = false;
-        
+
         this.deviceSizes = {
             phone: { width: 375, height: 667, label: 'iPhone SE' },
             tablet: { width: 768, height: 1024, label: 'iPad' },
@@ -21,7 +21,7 @@ class SandboxEngine {
         };
 
         this.panelSizes = ['25%', '50%', '75%', '100%'];
-        
+
         this.init();
     }
 
@@ -43,7 +43,7 @@ class SandboxEngine {
         panel.id = 'sandbox-panel';
         panel.className = 'sandbox-panel';
         panel.innerHTML = this.getPanelHTML();
-        
+
         document.body.appendChild(panel);
         this.panel = panel;
         this.attachPanelEvents();
@@ -214,7 +214,7 @@ class SandboxEngine {
                     this.saveToHistory();
                     this.refreshPreviewDebounced();
                 });
-                
+
                 // Tab key support
                 editor.addEventListener('keydown', (e) => this.handleEditorKeydown(e, editor));
             }
@@ -234,14 +234,14 @@ class SandboxEngine {
         this.currentProject = project;
         this.history = [];
         this.historyIndex = -1;
-        
+
         // Update title
         const titleEl = document.getElementById('sandbox-project-title');
         if (titleEl) titleEl.textContent = project.title;
 
         // Load project content
         await this.loadProjectContent(project);
-        
+
         // Show panel
         this.panel.classList.add('visible');
         this.isOpen = true;
@@ -256,7 +256,7 @@ class SandboxEngine {
         this.panel.classList.remove('visible');
         this.isOpen = false;
         document.body.style.overflow = '';
-        
+
         // Clear iframe
         const iframe = document.getElementById('sandbox-iframe');
         if (iframe) iframe.srcdoc = '';
@@ -266,7 +266,7 @@ class SandboxEngine {
         try {
             // Try to fetch project files
             const baseUrl = project.link.replace(/\/index\.html$/, '').replace(/\/$/, '');
-            
+
             // Fetch HTML
             let htmlContent = '';
             let cssContent = '';
@@ -276,23 +276,23 @@ class SandboxEngine {
                 const htmlResponse = await fetch(`${baseUrl}/index.html`);
                 if (htmlResponse.ok) {
                     htmlContent = await htmlResponse.text();
-                    
+
                     // Extract inline styles and scripts
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(htmlContent, 'text/html');
-                    
+
                     // Extract CSS from style tags
                     const styleTags = doc.querySelectorAll('style');
                     styleTags.forEach(style => {
                         cssContent += style.textContent + '\n';
                     });
-                    
+
                     // Extract JS from script tags (inline only)
                     const scriptTags = doc.querySelectorAll('script:not([src])');
                     scriptTags.forEach(script => {
                         jsContent += script.textContent + '\n';
                     });
-                    
+
                     // Get body content
                     const bodyContent = doc.body ? doc.body.innerHTML : htmlContent;
                     htmlContent = bodyContent;
@@ -450,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setPreviewSize(size) {
         this.previewSize = size;
-        
+
         const container = this.panel.querySelector('.sandbox-container');
         if (container) {
             container.style.width = size;
@@ -464,15 +464,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setDeviceMode(device) {
         this.previewMode = device;
-        
+
         const frame = document.getElementById('preview-device-frame');
         const notch = document.getElementById('device-notch');
         const label = document.getElementById('preview-device-label');
         const dimensions = document.getElementById('preview-dimensions');
-        
+
         if (frame) {
             frame.className = `preview-device-frame ${device}`;
-            
+
             const deviceInfo = this.deviceSizes[device];
             if (device !== 'desktop') {
                 frame.style.width = `${deviceInfo.width}px`;
@@ -533,7 +533,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const start = editor.selectionStart;
             const end = editor.selectionEnd;
             const value = editor.value;
-            
+
             editor.value = value.substring(0, start) + '    ' + value.substring(end);
             editor.selectionStart = editor.selectionEnd = start + 4;
         }
@@ -558,12 +558,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Add new state
         this.history.push(state);
-        
+
         // Limit history size
         if (this.history.length > this.maxHistorySize) {
             this.history.shift();
         }
-        
+
         this.historyIndex = this.history.length - 1;
         this.updateHistoryButtons();
     }
@@ -805,18 +805,18 @@ document.addEventListener('DOMContentLoaded', () => {
             startX = e.clientX;
             const container = this.panel.querySelector('.sandbox-container');
             startWidth = container.offsetWidth;
-            
+
             document.body.style.cursor = 'ew-resize';
             document.body.style.userSelect = 'none';
         });
 
         document.addEventListener('mousemove', (e) => {
             if (!isResizing) return;
-            
+
             const container = this.panel.querySelector('.sandbox-container');
             const dx = startX - e.clientX;
             const newWidth = Math.min(Math.max(startWidth + dx, 300), window.innerWidth - 50);
-            
+
             container.style.width = `${newWidth}px`;
         });
 
@@ -886,7 +886,7 @@ function addQuickPreviewButtons() {
                 if (node.nodeType === 1) {
                     const cards = node.querySelectorAll?.('.card:not(.has-preview-btn), .list-card:not(.has-preview-btn)') || [];
                     cards.forEach(addPreviewButtonToCard);
-                    
+
                     if (node.classList?.contains('card') && !node.classList.contains('has-preview-btn')) {
                         addPreviewButtonToCard(node);
                     }
@@ -911,19 +911,30 @@ function addPreviewButtonToCard(card) {
     previewBtn.className = 'preview-btn';
     previewBtn.title = 'Quick Preview';
     previewBtn.innerHTML = '<i class="ri-play-circle-line"></i>';
-    
+
     previewBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        
+
         // Extract project data from card
         const title = card.querySelector('.card-heading, .list-card-title')?.textContent || 'Untitled';
         const description = card.querySelector('.card-description, .list-card-description')?.textContent || '';
         const category = card.querySelector('.category-tag')?.textContent?.toLowerCase() || 'utility';
-        const link = card.querySelector('a')?.href || card.getAttribute('onclick')?.match(/'([^']+)'/)?.[1] || '';
-        
+
+        // Better link detection
+        let link = card.getAttribute('data-link');
+        if (!link) {
+            const onclick = card.getAttribute('onclick');
+            const match = onclick?.match(/window\.location\.href\s*=\s*'([^']+)'/);
+            link = match ? match[1] : '';
+        }
+        if (!link) {
+            link = card.querySelector('a')?.getAttribute('href') || '';
+        }
+
         const project = { title, description, category, link };
         window.sandboxEngine?.open(project);
+
     });
 
     actionsDiv.insertBefore(previewBtn, actionsDiv.firstChild);
@@ -934,11 +945,5 @@ function addPreviewButtonToCard(card) {
 const sandboxEngine = new SandboxEngine();
 window.sandboxEngine = sandboxEngine;
 
-// Initialize preview buttons when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', addQuickPreviewButtons);
-} else {
-    setTimeout(addQuickPreviewButtons, 100);
-}
 
 export { SandboxEngine, sandboxEngine };

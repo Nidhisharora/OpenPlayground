@@ -1,8 +1,8 @@
 {
-  "title": "IDRIUM Game",
+  "title": "Color Guessing Game",
   "category": "game",
   "difficulty": "Beginner",
-  "description": "A productivity project built with HTML, CSS, and JavaScript.",
+  "description": "A game project built with HTML, CSS, and JavaScript.",
   "tech": [
     "HTML",
     "CSS",

@@ -43,15 +43,9 @@
             </button>
         </div>
 
-        <!-- Compare Projects -->
-        <div class="compare-projects">
-            <button id="compare-projects-btn" class="compare-btn" title="Compare Selected Projects" disabled>
-                <i class="ri-git-compare-line"></i>
-                <span>Compare</span>
-                <span id="compare-count-badge" class="compare-badge">0</span>
-            </button>
-        </div>
     </div>
+
+
 
     <!-- Category Filter -->
     <div class="category-filter">
@@ -70,17 +64,21 @@
         <button class="filter-btn" data-filter="fun">
             <i class="ri-magic-line"></i> Fun
         </button>
-        <button class="filter-btn" data-filter="communication">
-            <i class="ri-chat-3-line"></i> Communication
-        </button>
         <button class="filter-btn" data-filter="educational">
             <i class="ri-book-open-line"></i> Educational
         </button>
-        <button class="filter-clear-btn"
-            onclick="window.projectManagerInstance?.state.visibilityEngine?.reset(); window.projectManagerInstance?.updateFilterUI(); window.projectManagerInstance?.render();"
+        <button class="filter-btn" data-filter="productivity">
+            <i class="ri-task-line"></i> Productivity
+        </button>
+        <button class="filter-btn" data-filter="communication">
+            <i class="ri-chat-3-line"></i> Communication
+        </button>
+
+        <button class="filter-clear-btn" onclick="window.projectManagerInstance?.resetFilters();"
             title="Clear All Filters">
             <i class="ri-filter-off-line"></i> Clear All
         </button>
+
     </div>
 
     <!-- Projects Display -->

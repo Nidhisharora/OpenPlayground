@@ -5,13 +5,15 @@ const PROJECTS_DIR = './projects';
 
 // Category detection
 const categoryKeywords = {
-    game: ['game', 'puzzle', 'play', 'arcade', 'chess', 'snake', 'invaders', 'dice', 'hangman', 'memory', 'tic-tac', 'maze', 'quest', 'whack', 'simon', 'minesweeper', 'sudoku', 'runner', 'basketball', 'flapping', 'horse', 'space', 'reflex', 'reaction'],
-    utility: ['calculator', 'converter', 'generator', 'checker', 'tracker', 'timer', 'clock', 'calendar', 'editor', 'finder', 'tester', 'validator', 'detector', 'uploader', 'preview', 'reader', 'shortener', 'captcha', 'password', 'otp', 'barcode', 'qr', 'unit', 'percentage', 'tip', 'bmi', 'age', 'currency', 'dictionary', 'weather', 'speed', 'internet'],
-    productivity: ['todo', 'note', 'planner', 'dashboard', 'tracker', 'kanban', 'diary', 'journal', 'expense', 'habit', 'pomodoro', 'subscription', 'study', 'focus', 'reminder', 'medicine', 'organizer'],
-    fun: ['fun', 'joke', 'meme', 'emoji', 'random', 'charade', 'truth', 'dare', 'quote', 'affirmation', 'excuse', 'drum', 'piano', 'color', 'gradient', 'particle', 'bubble', 'balloon', 'coin', 'spinner', 'mood', 'relax'],
-    educational: ['quiz', 'learn', 'education', 'periodic', 'visualizer', 'simulation', 'algorithm', 'sorting', 'pathfinding', 'cpu', 'stack', 'queue', 'regex', 'sql', 'network', 'system', 'physics', 'gravity', 'pendulum', 'tower', 'hanoi', 'road', 'safety', 'traffic', 'typing'],
-    puzzle: ['puzzle', 'sliding', 'flip', 'scramble', 'twist', 'portal', 'pattern', 'number']
+    puzzle: ['puzzle', 'sliding', 'flip', 'scramble', 'twist', 'portal', 'pattern', 'number', 'match-3', 'sudoku', 'minesweeper', '2048'],
+    game: ['game', 'play', 'arcade', 'chess', 'snake', 'invaders', 'dice', 'hangman', 'memory', 'tic-tac', 'maze', 'quest', 'whack', 'simon', 'runner', 'basketball', 'flapping', 'horse', 'space', 'reflex', 'reaction', 'breakout', 'shooter', 'platformer', 'jump', 'bird', 'ball', 'physics-world', 'tower-defense', 'fight', 'racing', 'poker', 'clicker'],
+    communication: ['chat', 'message', 'messenger', 'forum', 'mail', 'email', 'social', 'community', 'connect', 'talk', 'video-call', 'voice', 'connect-four'],
+    productivity: ['todo', 'note', 'planner', 'dashboard', 'tracker', 'kanban', 'diary', 'journal', 'expense', 'habit', 'pomodoro', 'subscription', 'study', 'focus', 'reminder', 'medicine', 'organizer', 'resume', 'cv', 'editor', 'spreadsheet', 'markdown'],
+    educational: ['quiz', 'learn', 'education', 'periodic', 'visualizer', 'simulation', 'algorithm', 'sorting', 'pathfinding', 'cpu', 'stack', 'queue', 'regex', 'sql', 'network', 'system', 'physics', 'gravity', 'pendulum', 'tower', 'hanoi', 'road', 'safety', 'traffic', 'typing', 'cheat-sheet', 'tutorial'],
+    fun: ['fun', 'joke', 'meme', 'emoji', 'random', 'charade', 'truth', 'dare', 'quote', 'affirmation', 'excuse', 'drum', 'piano', 'color', 'gradient', 'particle', 'bubble', 'balloon', 'coin', 'spinner', 'mood', 'relax', 'paint', 'draw', 'drawing', 'canvas-art', 'etch', 'sketch'],
+    utility: ['calculator', 'converter', 'generator', 'checker', 'tracker', 'timer', 'clock', 'calendar', 'finder', 'tester', 'validator', 'detector', 'uploader', 'preview', 'reader', 'shortener', 'captcha', 'password', 'otp', 'barcode', 'qr', 'unit', 'percentage', 'tip', 'bmi', 'age', 'currency', 'dictionary', 'weather', 'speed', 'internet', 'translator', 'ip-address', 'password-manager']
 };
+
 
 const categoryIcons = {
     game: 'ri-gamepad-line',
@@ -71,7 +73,7 @@ function formatTitle(folderName) {
         .join(' ');
 }
 
-console.log('🔍 Scanning for projects without project.json...\n');
+console.log('🔍 Scanning projects...\n');
 
 const folders = fs.readdirSync(PROJECTS_DIR).filter(f => {
     const fullPath = path.join(PROJECTS_DIR, f);
@@ -79,6 +81,7 @@ const folders = fs.readdirSync(PROJECTS_DIR).filter(f => {
 });
 
 let created = 0;
+let updated = 0;
 let skipped = 0;
 
 folders.forEach(folder => {
@@ -86,36 +89,48 @@ folders.forEach(folder => {
     const jsonPath = path.join(folderPath, 'project.json');
     const indexRelativePath = findIndexHtml(folderPath);
 
-    // Skip if no index.html found in common locations
     if (!indexRelativePath) {
         skipped++;
         return;
     }
 
-    // Skip if project.json already exists and is valid
+    let existingData = null;
     if (fs.existsSync(jsonPath)) {
         try {
-            JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
-            return;
-        } catch { }
+            existingData = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+        } catch (e) { }
     }
 
-    const category = detectCategory(folder);
-    const projectData = {
-        title: formatTitle(folder),
-        category: category,
-        difficulty: 'Beginner',
-        description: `A ${category} project built with HTML, CSS, and JavaScript.`,
-        tech: ['HTML', 'CSS', 'JavaScript'],
-        icon: categoryIcons[category] || 'ri-code-s-slash-line',
-        coverStyle: categoryStyles[category] || categoryStyles.utility
-    };
+    const newCategory = detectCategory(folder);
 
-    fs.writeFileSync(jsonPath, JSON.stringify(projectData, null, 2));
-    console.log(`✅ Created: ${folder}/project.json`);
-    created++;
+    if (!existingData) {
+        const projectData = {
+            title: formatTitle(folder),
+            category: newCategory,
+            difficulty: 'Beginner',
+            description: `A ${newCategory} project built with HTML, CSS, and JavaScript.`,
+            tech: ['HTML', 'CSS', 'JavaScript'],
+            icon: categoryIcons[newCategory] || 'ri-code-s-slash-line',
+            coverStyle: categoryStyles[newCategory] || categoryStyles.utility
+        };
+        fs.writeFileSync(jsonPath, JSON.stringify(projectData, null, 2));
+        console.log(`✅ Created: ${folder}/project.json`);
+        created++;
+    } else {
+        const currentCat = existingData.category?.toLowerCase() || 'utility';
+        if (currentCat !== newCategory) {
+            existingData.category = newCategory;
+            existingData.icon = categoryIcons[newCategory] || existingData.icon;
+            existingData.coverStyle = categoryStyles[newCategory] || existingData.coverStyle;
+
+            fs.writeFileSync(jsonPath, JSON.stringify(existingData, null, 2));
+            console.log(`🔄 Updated: ${folder} (${currentCat} -> ${newCategory})`);
+            updated++;
+        }
+    }
 });
 
 console.log(`\n🎉 Done!`);
-console.log(`   Created: ${created} project.json files`);
-console.log(`   Skipped: ${skipped} folders (no index.html found)`);
+console.log(`   Created: ${created} files`);
+console.log(`   Updated: ${updated} files`);
+console.log(`   Skipped: ${skipped} folders`);

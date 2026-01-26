@@ -18,13 +18,12 @@ export class ProjectVisibilityEngine {
         this.state = {
             searchQuery: "",
             categories: new Set(["all"]),
-            collection: null, // null = all, or collection id
+            collection: null,
             page: 1,
             itemsPerPage: 10,
-            sortMode: "default", // default, az, za, newest, trending, rating-high, rating-low
-            collection: null, // For collections feature
+            sortMode: "default"
         };
-        
+
         // Reference to analytics engine (injected later)
         this.analyticsEngine = null;
     }
@@ -32,7 +31,7 @@ export class ProjectVisibilityEngine {
     /* ------------------
      * Analytics Integration
      * ------------------ */
-    
+
     setAnalyticsEngine(engine) {
         this.analyticsEngine = engine;
     }
@@ -47,7 +46,7 @@ export class ProjectVisibilityEngine {
     }
 
     toggleCategory(category) {
-        const cat = category.toLowerCase();
+        const cat = this.normalizeCategory(category);
         if (cat === "all") {
             this.state.categories.clear();
             this.state.categories.add("all");
@@ -65,6 +64,17 @@ export class ProjectVisibilityEngine {
         this.state.page = 1;
     }
 
+    normalizeCategory(cat) {
+        if (!cat) return "other";
+        const normalized = cat.trim().toLowerCase().replace(/\s+/g, '_');
+        const pluralMap = {
+            'games': 'game',
+            'puzzles': 'puzzle',
+            'utilities': 'utility'
+        };
+        return pluralMap[normalized] || normalized;
+    }
+
     setCollection(collectionId) {
         this.state.collection = collectionId;
         this.state.page = 1;
@@ -79,18 +89,12 @@ export class ProjectVisibilityEngine {
         this.state.page = 1;
     }
 
-    setCollection(collectionId) {
-        this.state.collection = collectionId;
-        this.state.page = 1;
-    }
-
     reset() {
         this.state.searchQuery = "";
         this.state.categories = new Set(["all"]);
         this.state.collection = null;
         this.state.page = 1;
         this.state.sortMode = "default";
-        this.state.collection = null;
     }
 
     /* ------------------
@@ -102,7 +106,7 @@ export class ProjectVisibilityEngine {
             const matchesSearch =
                 project.title.toLowerCase().includes(this.state.searchQuery);
 
-            const projectCat = project.category ? project.category.toLowerCase() : "";
+            const projectCat = this.normalizeCategory(project.category);
             const matchesCategory =
                 this.state.categories.has("all") ||
                 this.state.categories.has(projectCat);
@@ -121,27 +125,25 @@ export class ProjectVisibilityEngine {
      */
     applySorting(projects) {
         const sorted = [...projects];
-        
+
         switch (this.state.sortMode) {
             case 'az':
                 sorted.sort((a, b) => a.title.localeCompare(b.title));
                 break;
-                
+
             case 'za':
                 sorted.sort((a, b) => b.title.localeCompare(a.title));
                 break;
-                
+
             case 'newest':
-                // Sort by date if available, otherwise keep order
                 sorted.sort((a, b) => {
                     const dateA = a.dateAdded ? new Date(a.dateAdded) : new Date(0);
                     const dateB = b.dateAdded ? new Date(b.dateAdded) : new Date(0);
                     return dateB - dateA;
                 });
                 break;
-                
+
             case 'trending':
-                // Sort by popularity score from analytics
                 if (this.analyticsEngine) {
                     sorted.sort((a, b) => {
                         const projectIdA = a.folder || a.name || a.title;
@@ -152,21 +154,20 @@ export class ProjectVisibilityEngine {
                     });
                 }
                 break;
-                
+
             case 'rating-high':
                 sorted.sort((a, b) => (b.rating || 0) - (a.rating || 0));
                 break;
-                
+
             case 'rating-low':
                 sorted.sort((a, b) => (a.rating || 0) - (b.rating || 0));
                 break;
-                
+
             case 'default':
             default:
-                // Keep original order
                 break;
         }
-        
+
         return sorted;
     }
 
@@ -175,11 +176,11 @@ export class ProjectVisibilityEngine {
      */
     getProjectsWithBadges() {
         const projects = this.getVisibleProjects();
-        
+
         if (!this.analyticsEngine) {
             return projects.map(p => ({ ...p, badge: null }));
         }
-        
+
         return projects.map(project => {
             const projectId = project.folder || project.name || project.title;
             const badge = this.analyticsEngine.getProjectBadge(projectId);
@@ -194,10 +195,10 @@ export class ProjectVisibilityEngine {
         if (!this.analyticsEngine) {
             return [];
         }
-        
+
         const trending = this.analyticsEngine.getTrendingProjects(limit);
         return trending.map(t => {
-            const project = this.projects.find(p => 
+            const project = this.projects.find(p =>
                 (p.folder || p.name || p.title) === t.projectId
             );
             return project ? { ...project, trendingScore: t.score } : null;
@@ -211,10 +212,10 @@ export class ProjectVisibilityEngine {
         if (!this.analyticsEngine) {
             return [];
         }
-        
+
         const gems = this.analyticsEngine.getHiddenGems(limit);
         return gems.map(g => {
-            const project = this.projects.find(p => 
+            const project = this.projects.find(p =>
                 (p.folder || p.name || p.title) === g.projectId
             );
             return project ? { ...project, gemScore: g.score } : null;
@@ -247,7 +248,7 @@ export class ProjectVisibilityEngine {
     getStateFromURL() {
         const params = new URLSearchParams(window.location.search);
         return {
-            category: params.get('category') || 'all',
+            categories: params.get('cats') ? params.get('cats').split(',') : ['all'],
             search: params.get('search') || '',
             sort: params.get('sort') || 'default',
             page: parseInt(params.get('page')) || 1,
@@ -255,11 +256,11 @@ export class ProjectVisibilityEngine {
         };
     }
 
-    updateURL() {
+    updateURL(viewMode = 'card') {
         const params = new URLSearchParams();
-        
-        if (this.state.category !== 'all') {
-            params.set('category', this.state.category);
+
+        if (!this.state.categories.has('all')) {
+            params.set('cats', Array.from(this.state.categories).join(','));
         }
         if (this.state.searchQuery) {
             params.set('search', this.state.searchQuery);
@@ -270,14 +271,15 @@ export class ProjectVisibilityEngine {
         if (this.state.page > 1) {
             params.set('page', this.state.page);
         }
-        if (this.state.collection) {
-            params.set('collection', this.state.collection);
+        if (viewMode !== 'card') {
+            params.set('view', viewMode);
         }
-        
-        const newURL = params.toString() 
+
+        const newURL = params.toString()
             ? `${window.location.pathname}?${params.toString()}`
             : window.location.pathname;
-            
-        window.history.replaceState({}, '', newURL);
+
+        window.history.replaceState({ path: newURL }, '', newURL);
     }
 }
+

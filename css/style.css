@@ -656,7 +656,7 @@ html[data-theme="dark"] .card-actions .bookmark-btn.bookmarked {
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  color: #ff6b35;
+  color: var(--text-secondary);
   font-weight: 600;
   padding: var(--space-2) var(--space-3);
 }
@@ -666,7 +666,7 @@ html[data-theme="dark"] .card-actions .bookmark-btn.bookmarked {
 }
 
 .nav-links .fullstack-link:hover {
-  color: #ff5722;
+ color: var(--text-secondary);
 }
 
 .nav-links .fullstack-link:hover i {

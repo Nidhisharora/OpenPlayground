@@ -2571,7 +2571,21 @@
     "link": "./projects/perlin-terrain/index.html",
     "icon": "ri-landscape-line",
     "coverStyle": "background: linear-gradient(135deg, #355c7d 0%, #6c5b7b 50%, #c06c84 100%); color: #f8fafc;"
-  }
+  },
   
+  {
+    "title": "Circle Packing",
+    "category": "experimental",
+    "difficulty": "Beginner",
+    "description": "A generative art sketch that fills the canvas with non-overlapping circles that grow until collision, demonstrating how spatial constraints and simple rules create dense, organic patterns.",
+    "tech": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "link": "./projects/circle-packing/index.html",
+    "icon": "ri-bubble-chart-line",
+    "coverStyle": "background: linear-gradient(135deg, #1d2671 0%, #c33764 100%); color: #f8fafc;"
+  }
   
 ]

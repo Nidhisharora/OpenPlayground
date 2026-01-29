@@ -2556,6 +2556,22 @@
     "link": "./projects/tiling-patterns/index.html",
     "icon": "ri-grid-line",
     "coverStyle": "background: linear-gradient(135deg, #232526 0%, #414345 100%); color: #f8fafc;"
+  },
+
+  {
+    "title": "Perlin Terrain",
+    "category": "experimental",
+    "difficulty": "Beginner",
+    "description": "A generative terrain visualization that uses smoothly interpolated noise to create organic, landscape-like height maps, demonstrating how Perlin-style randomness mimics natural patterns.",
+    "tech": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "link": "./projects/perlin-terrain/index.html",
+    "icon": "ri-landscape-line",
+    "coverStyle": "background: linear-gradient(135deg, #355c7d 0%, #6c5b7b 50%, #c06c84 100%); color: #f8fafc;"
   }
+  
   
 ]

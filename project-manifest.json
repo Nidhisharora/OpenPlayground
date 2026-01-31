@@ -1949,6 +1949,16 @@
       "link": "./projects/WorldMeetingPlanner/index.html"
     },
     {
+      "folder": "staircase",
+      "path": "./projects/staircase/project.json",
+      "link": "./projects/staircase/index.html"
+    },
+    {
+      "folder": "expensetracker",
+      "path": "./projects/expensetracker/project.json",
+      "link": "./projects/expensetracker/index.html"
+    },
+    {
       "folder": "Focus Timer Pro",
       "path": "./projects/Focus-Timer-Pro/project.json",
       "link": "./projects/Focus-Timer-Pro/index.html"
@@ -1962,6 +1972,11 @@
       "folder": "ToDoIst",
       "path": "./projects/ToDoIst/project.json",
       "link": "./projects/ToDoIst/index.html"
+    },
+    {
+      "folder": "thumbnail",
+      "path": "./projects/thumbnail/project.json",
+      "link": "./projects/thumbnail/index.html"
     },
     {
       "folder": "Resumator",

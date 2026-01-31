@@ -1760,5 +1760,10 @@
       "path":"./projects/Matching-Cards/project.json",
       "link":"./projects/Matching-Cards/index.html"
     }
+    {
+      "folder":"Studenthousefinder",
+      "path":"./projects/Studenthousefinder/project.json",
+      "link":"./projects/Studenthousefinder/index.html"
+    }
   ]
 }

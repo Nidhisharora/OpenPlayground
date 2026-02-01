@@ -1929,6 +1929,11 @@
       "link": "./projects/CSV-Cleaner/index.html"
     },
     {
+      "folder": "HUMANBODYMAP",
+      "path": "./projects/HUMANBODYMAP/project.json",
+      "link": "./projects/HUMANBODYMAP/index.html"
+    },
+    {
       "folder": "SEOMETA",
       "path": "./projects/SEOMETA/project.json",
       "link": "./projects/SEOMETA/index.html"

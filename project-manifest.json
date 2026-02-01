@@ -1949,6 +1949,11 @@
       "link": "./projects/Memory-of-Emotions/index.html"
     },
     {
+      "folder": "LifeTimePlanner",
+      "path": "./projects/LifeTimePlanner/project.json",
+      "link": "./projects/LifeTimePlanner/index.html"
+    },
+    {
       "folder": "SEOMETA",
       "path": "./projects/SEOMETA/project.json",
       "link": "./projects/SEOMETA/index.html"

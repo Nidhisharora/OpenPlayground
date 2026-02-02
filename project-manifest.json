@@ -2112,6 +2112,11 @@
       "path": "./projects/battery-status-viewer/project.json",
       "link": "./projects/battery-status-viewer/index.html"
     }
+    {
+      "folder": "FocusYou",
+      "path": "./projects/FocusYou/project.json",
+      "link": "./projects/FocusYou/index.html"
+    }
   
   
   

@@ -1977,6 +1977,11 @@
       "folder": "Resumator",
       "path": "./projects/Resumator/project.json",
       "link": "./projects/Resumator/index.html"
+    },
+    {
+      "folder": "binary-search-tree-visualizer",
+      "path": "./projects/binary-search-tree-visualizer/project.json",
+      "link": "./projects/binary-search-tree-visualizer/index.html"
     }
   ]
 }

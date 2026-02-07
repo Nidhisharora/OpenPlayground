@@ -1992,6 +1992,14 @@
       "folder": "graph-coloring-visualizer",
       "path": "./projects/graph-coloring-visualizer/project.json",
       "link": "./projects/graph-coloring-visualizer/index.html"
+    },
+    {
+      "folder": "quantum-bit-simulator",
+      "path": "./projects/quantum-bit-simulator/project.json",
+      "link": "./projects/quantum-bit-simulator/index.html"
     }
-  ]
+  ],
+  "version": "2.1",
+  "generated": "2026-01-24T16:38:07.796Z",
+  "count": 365
 }

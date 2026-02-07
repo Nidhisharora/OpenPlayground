@@ -13,7 +13,7 @@ form.addEventListener("submit", function(e) {
   };
 
   localStorage.setItem("user", JSON.stringify(user));
-
+  generatePlan();
   window.location.href = "planner.html";
 });
 

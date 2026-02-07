@@ -34,6 +34,11 @@
       "link": "./projects/e-learn/index.html"
     },
     {
+      "folder": "Impulse-Control",
+      "path": "./projects/Impulse-Control/project.json",
+      "link": "./projects/Impulse-Control/index.html"
+    },
+    {
       "folder": "input-output",
       "path": "./projects/input-output/project.json",
       "link": "./projects/input-output/index.html"

@@ -9,9 +9,19 @@
       "link": "./projects/15 Sliding Puzzle/index.html"
     },
     {
+      "folder": "ContraForce",
+      "path": "./projects/ContraForce/project.json",
+      "link": "./projects/ContraForce/index.html"
+    },
+    {
       "folder": "2048-puzzle",
       "path": "./projects/2048-puzzle/project.json",
       "link": "./projects/2048-puzzle/index.html"
+    },
+    {
+      "folder": "forget-curve",
+      "path": "./projects/forget-curve/project.json",
+      "link": "./projects/forget-curve/index.html"
     },
     {
       "folder": "one-btn",
@@ -32,6 +42,11 @@
       "folder": "e-learn",
       "path": "./projects/e-learn/project.json",
       "link": "./projects/e-learn/index.html"
+    },
+    {
+      "folder": "split-decision",
+      "path": "./projects/split-decision/project.json",
+      "link": "./projects/split-decision/index.html"
     },
     {
       "folder": "Impulse-Control",
@@ -2082,6 +2097,11 @@
       "folder": "Event Manager",
       "path": "./projects/Event Manager/project.json",
       "link": "./projects/Event Manager/index.html"
+      "folder": "RPG-character",
+      "path": "./projects/RPG-character/project.json",
+      "link": "./projects/RPG-character/index.html"
+    },
+    {
       "folder": "Tower_Defence",
       "path": "./projects/Tower_Defence/project.json",
       "link": "./projects/Tower_Defence/index.html"

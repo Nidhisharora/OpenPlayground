@@ -1,21 +1,14 @@
 {
-    "name": "NEO-GEN Nebula",
+    "title": "NEO-GEN Nebula",
+    "category": "utility",
+    "difficulty": "Beginner",
     "description": "High-fidelity audio-reactive nebula visualizer with a sci-fi interface and local auth.",
-    "version": "1.0.0",
-    "author": "Antigravity",
-    "tags": [
-        "audio-reactive",
-        "canvas",
-        "sci-fi",
-        "generative-art",
-        "auth"
+    "tech": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Web Audio API"
     ],
-    "entry": "index.html",
-    "features": [
-        "Local Storage Authentication",
-        "Web Audio API Frequency Analysis",
-        "Particle-based Flow Field",
-        "Dynamic UI Parameter Control",
-        "Session Persistence"
-    ]
+    "icon": "ri-tools-line",
+    "coverStyle": "background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white;"
 }

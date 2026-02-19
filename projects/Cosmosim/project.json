@@ -1,10 +1,8 @@
 {
   "name": "COSMOSIM",
   "subtitle": "Interactive Solar System Simulator",
-  "version": "1.0.0",
   "description": "A real-time animated solar system with orbital mechanics, planet data, speed control, and a cinematic space aesthetic built in pure HTML/CSS/JS.",
   "author": "Avdhut",
-  "created": "2026-02-19",
   "tech": ["HTML5 Canvas", "CSS3", "Vanilla JavaScript ES6"],
   "features": [
     "Real-time orbital animation on HTML5 Canvas",

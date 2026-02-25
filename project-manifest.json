@@ -444,6 +444,11 @@
       "link": "./projects/Chronova/index.html"
     },
     {
+      "folder": "Budgetly",
+      "path": "./projects/Budgetly/project.json",
+      "link": "./projects/Budgetly/index.html"
+    },
+    {
       "folder": "calcx-calculator-app",
       "path": "./projects/calcx-calculator-app/project.json",
       "link": "./projects/calcx-calculator-app/index.html"

@@ -4,7 +4,15 @@ const pantryInput = document.getElementById('pantry-input');
 const generateBtn = document.getElementById('generate-btn');
 const recipeOutput = document.getElementById('recipe-output');
 const saveFavoriteBtn = document.getElementById('save-favorite');
+
 const favoritesList = document.getElementById('favorites-list');
+const clearPantryBtn = document.getElementById('clear-pantry-btn');
+// Clear pantry input
+clearPantryBtn.onclick = () => {
+    pantryInput.value = '';
+    recipeOutput.textContent = '';
+    saveFavoriteBtn.style.display = 'none';
+};
 
 // Simulate AI recipe generation
 function generateRecipe(ingredients) {

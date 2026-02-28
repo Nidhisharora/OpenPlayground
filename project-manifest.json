@@ -444,6 +444,16 @@
       "link": "./projects/Chronova/index.html"
     },
     {
+      "folder": "StudyNova",
+      "path": "./projects/StudyNova/project.json",
+      "link": "./projects/StudyNova/index.html"
+    },
+    {
+      "folder": "Budgetly",
+      "path": "./projects/Budgetly/project.json",
+      "link": "./projects/Budgetly/index.html"
+    },
+    {
       "folder": "calcx-calculator-app",
       "path": "./projects/calcx-calculator-app/project.json",
       "link": "./projects/calcx-calculator-app/index.html"
@@ -2337,6 +2347,10 @@
       "folder": "Famous Scientists Gallery",
       "path": "./projects/famous-scientists-gallery/project.json",
       "link": "./projects/famous-scientists-gallery/index.html"
+   {
+      "folder": "World Wonders Gallery",
+      "path": "./projects/world-wonders-gallery/project.json",
+      "link": "./projects/world-wonders-gallery/index.html"
   }
   ]
 }
